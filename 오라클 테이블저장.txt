@@ -1,0 +1,41 @@
+select * from mvc_board;
+select * from members;
+select * from file_board;
+
+delete from members
+ where id='aaaa';
+ 
+delete from mvc_board
+ where bname='aaaa';
+ 
+delete from file_board
+ where fname=0;
+
+create sequence mvc_board_seq;
+create sequence file_board_seq;
+
+commit;
+
+create table mvc_board (
+bCategory number(2),
+bId number(4) primary key,
+bName varchar2(40),
+bTitle varchar2(100),
+bContent varchar2(300),
+bDate date default sysdate,
+bHit number(4) default 0,
+bGroup number(4),
+bStep number(4),
+bIndent number(4)
+);
+
+create table file_board (
+fId number(4) primary key,
+fName varchar2(40),
+fTitle varchar2(100),
+fContent varchar2(300),
+fileName varchar2(100),
+orgfileName varchar2(100),
+fDate date default sysdate,
+fHit number(4) default 0
+);

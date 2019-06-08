@@ -1,0 +1,12 @@
+http://openapi.seoul.go.kr:8088/707a45486e6a6973373541554f4365/xml/GeoInfoShelterWGS/1/694
+
+이렇게쳐야 대피소 694개 전부 나옴.
+
+http://blog.naver.com/PostView.nhn?blogId=yandul83&logNo=220436066801
+위치표시 블로그
+
+https://mailmail.tistory.com/19
+마커 및 마커 메시지 출력
+
+https://webnautes.tistory.com/1011
+현재 위치 표시하기

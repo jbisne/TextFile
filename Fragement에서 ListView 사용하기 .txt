@@ -1,0 +1,36 @@
+첫 번째 에러가 발생하는 원인은 ArrayAdapter 생성자의 첫번째 파라미터로 
+전달되는 Context에 대한 접근 문제 때문입니다. 
+Activity는 android.content.Context로부터 상속받은 클래스이므로 Context의 기능을 
+그대로 이용할 수 있기 때문에 onCreate() 함수에서 ArrayAdapter 생성자의 첫번째 
+파라미터로 this를 전달할 수 있습니다. 
+하지만 Fragment는 java.lang.Object로부터 직접 상속받은 클래스입니다. 
+즉, Context와는 전혀 관계가 없는 상태라서 this를 사용할 수 없는거죠. 
+
+그럼 Fragment에서는 ListView를 사용할 수 없는 걸까요? 
+아닙니다. 당연히 해결할 수 있는 방법이 존재합니다. 그것도 아주 간단하게 말이죠. 
+바로 Fragment에서 자신이 속한 Activity의 참조를 얻어온 다음 
+ArrayAdapter의 생성자로 전달하는 것입니다. 이미 Fragment에는 Activity의
+참조를 획득할 수 있는 getActivity()라는 함수가 있습니다.
+
+두 번째 에러는 findViewById() 함수 호출 때문입니다. 
+findViewById() 함수는 Fragment의 멤버 함수가 아닙니다. View의 멤버 함수이죠. 
+즉, Fragment의 멤버 함수가 아닌 findViewById() 함수를 Fragment에서 호출하려고 하니 
+에러가 발생하는 것입니다.
+해결 방법은 LayoutInflater를 사용하여 Resource Layout을 View로 변환한 다음 
+해당 View를 사용하여 findViewById()를 호출하는 것입니다.
+
+Fragment에 ListView를 추가하는 코드는 다음처럼 작성하시면 됩니다.
+
+@Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
+	{
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment1, null) ;
+
+        ArrayAdapter Adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, LIST_MENU) ;
+
+        ListView listview = (ListView) view.findViewById(R.id.listview1) ;
+        listview.setAdapter(adapter) ;
+
+        return view ;
+    }
