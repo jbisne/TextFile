@@ -11,6 +11,4 @@ select * from REPORT;
 select * from REVIEW;
 select * from REPLY;
 
-delete from GOODSBOARD where BID='21';
-
-
+select * from user_list;
