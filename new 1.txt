@@ -1,0 +1,113 @@
+// SaleList - onItemClick 복붙
+
+String MEMAIL = pref.getString("MEMAIL","");
+                String MPWCONFIRM = pref.getString("MPWCONFIRM","");
+                String MNAME = pref.getString("MNAME","");
+                Log.d(TAG, "sell detail 버튼 클릭 리스너 : " + MEMAIL + MPWCONFIRM + MNAME);
+                if(MEMAIL == "" || MEMAIL == null ||MPWCONFIRM =="" || MPWCONFIRM ==null || MNAME==""||MNAME==null){
+                    String toastMsg = "로그인을 해야 이용할 수 있습니다.";
+                    Toast.makeText(getContext(),toastMsg,Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }else{
+                    try{
+                        LoginAsync task = new LoginAsync();
+
+                        String result = task.execute(MEMAIL,MPWCONFIRM).get();
+                        // execute()에 들어가는건 파라미터로 들어감. 조건문으로 들어간다는 뜻.
+
+                        JSONObject jsonObject = new JSONObject(result);
+                        JSONArray arr = jsonObject.getJSONArray("returns");
+                        if(arr.toString().equals("[]")){
+//                            Log.d(TAG, "write 로그인 실패!");
+//                            Toast.makeText(getContext(), "아이디나 비밀번호가 틀립니다.", Toast.LENGTH_SHORT).show();
+                            String toastMsg = "로그인을 해야 이용할 수 있습니다.";
+                            Toast.makeText(getContext(),toastMsg,Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getContext(), LoginActivity.class);
+                            startActivity(intent);
+
+                        }
+                        else {
+//                            toastMsg = "로그인 성공";
+                            Intent intent = new Intent(getActivity(), GoodsDetail.class);
+                            intent.putExtra("MEMAIL",MEMAIL);
+                            intent.putExtra("MPWCONFIRM",MPWCONFIRM);
+                            intent.putExtra("MNAME",MNAME);
+//                            startActivity(intent);
+
+//                            finish();
+
+/// Test에서 값 바당와서 SaleList -> GoodsDetail 로 GoodsBoard(상품정보) 데이터 보내주는 try~catch 문 ////////////
+                            try
+                            {
+                                String BID =
+                                DetailAsync detailAsync = new DetailAsync();
+                                String result2 = detailAsync.execute(BID).get();
+                                Log.d(TAG,result2);
+                                JSONObject jsonObject2 = new JSONObject(result2);
+                                JSONArray arr2 = jsonObject2.getJSONArray("returns2");
+                                Log.d(TAG,"SaleList -> GoodsDetail로 데이터 전송 전");
+
+                                for (int i=0; i<arr2.length(); i++)
+                                {
+                                    Log.d(TAG,"SaleList -> GoodsDetail로 데이터 전송 성공");
+
+                                    String BID = arr2.getJSONObject(i).getString("BID");
+                                    String BIMAGE1 = arr2.getJSONObject(i).getString("BIMAGE1");
+                                    String BIMAGE2 = arr2.getJSONObject(i).getString("BIMAGE2");
+                                    String BIMAGE3 = arr2.getJSONObject(i).getString("BIMAGE3");
+                                    String BIMAGE4 = arr2.getJSONObject(i).getString("BIMAGE4");
+                                    String BTITLE = arr2.getJSONObject(i).getString("BTITLE");
+                                    String BCOST = arr2.getJSONObject(i).getString("BCOST");
+                                    String BNAME = arr2.getJSONObject(i).getString("BNAME");
+                                    String BCONTENT = arr2.getJSONObject(i).getString("BCONTENT");
+                                    String BLOCATION = arr2.getJSONObject(i).getString("BLOCATION");
+                                    String BDATE = arr2.getJSONObject(i).getString("BDATE");
+                                    String BPOSITION = arr2.getJSONObject(i).getString("BPOSITION");
+                                    String BTRAEDOK = arr2.getJSONObject(i).getString("BTRAEDOK");
+
+                                    Log.d(TAG,"D"+arr);
+
+                                    intent.putExtra("BID",BID);
+                                    intent.putExtra("BIMAGE1",BIMAGE1);
+                                    intent.putExtra("BIMAGE2",BIMAGE2);
+                                    intent.putExtra("BIMAGE3",BIMAGE3);
+                                    intent.putExtra("BIMAGE4",BIMAGE4);
+                                    intent.putExtra("BCOST",BCOST);
+                                    intent.putExtra("BTITLE",BTITLE);
+                                    intent.putExtra("BNAME",BNAME);        // 여기말고 memberDB에서 가져와야할수도.
+                                    intent.putExtra("BCONTENT",BCONTENT);
+                                    intent.putExtra("BLOCATION",BLOCATION);    // 여기말고 memberDB에서 가져와야할수도.
+                                    intent.putExtra("BDATE",BDATE);
+                                    intent.putExtra("BPOSITION",BPOSITION);
+                                    intent.putExtra("BTRAEDOK",BTRAEDOK);
+
+                                }
+                            }
+                            catch(Exception e)
+                            {
+                                e.printStackTrace();
+                                Log.d(TAG, ".....ERROR111111.....!");
+                            }
+
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                        Log.d(TAG, ".....ERROR.....!");
+                    }
+
+                }
+
+            }
+        });
+
+        return view;
+
+
+    }
+
+
+
+}
+
+

@@ -1,0 +1,45 @@
+//         String bid = items.getBID();
+//                        Log.d(TAG,"BID" + bid);
+//                        DetailAsync detailAsync = new DetailAsync();
+//                        String result2 = detailAsync.execute(bid).get();
+//                        Log.d(TAG,result2);
+//                        JSONArray arr2 = new JSONArray(result2);
+//                        Log
+
+//                        String result2;
+//                        Test task2 = new Test();
+//                        result2 = task2.execute().get();
+//                        Log.d(TAG, result2);
+//                        JSONObject jsonObject = new JSONObject(result2);
+//                        JSONArray arr2 = jsonObject.getJSONArray("returns");
+//
+//                        String BID = arr2.getJSONObject(0).getString("BID");
+//                        String BIMAGE1 = arr2.getJSONObject(0).getString("BIMAGE1");
+//                        String BIMAGE2 = arr2.getJSONObject(0).getString("BIMAGE2");
+//                        String BIMAGE3 = arr2.getJSONObject(0).getString("BIMAGE3");
+//                        String BIMAGE4 = arr2.getJSONObject(0).getString("BIMAGE4");
+//                        String BTITLE = arr2.getJSONObject(0).getString("BTITLE");
+//                        String BCOST = arr2.getJSONObject(0).getString("BCOST");
+//                        String BNAME = arr2.getJSONObject(0).getString("BNAME");
+//                        String BCONTENT = arr2.getJSONObject(0).getString("BCONTENT");
+//                        String BLOCATION = arr2.getJSONObject(0).getString("BLOCATION");
+//                        String BDATE = arr2.getJSONObject(0).getString("BDATE");
+//                        String BPOSITION = arr2.getJSONObject(0).getString("BPOSITION");
+//                        String BTRAEDOK = arr2.getJSONObject(0).getString("BTRAEDOK");
+//
+//                            Log.d(TAG, BID);
+//
+//                        intent.putExtra("BID",BID);
+//                        intent.putExtra("BIMAGE1",BIMAGE1);
+//                        intent.putExtra("BIMAGE2",BIMAGE2);
+//                        intent.putExtra("BIMAGE3",BIMAGE3);
+//                        intent.putExtra("BIMAGE4",BIMAGE4);
+//                        intent.putExtra("BCOST",BCOST);
+//                        intent.putExtra("BTITLE",BTITLE);
+//                        intent.putExtra("BNAME",BNAME);        // 여기말고 memberDB에서 가져와야할수도.
+//                        intent.putExtra("BCONTENT",BCONTENT);
+//                        intent.putExtra("BLOCATION",BLOCATION);    // 여기말고 memberDB에서 가져와야할수도.
+//                        intent.putExtra("BDATE",BDATE);
+//                        intent.putExtra("BPOSITION",BPOSITION);
+//                        intent.putExtra("BTRAEDOK",BTRAEDOK);
+//                        intent.putExtra("Arr", result2 );
